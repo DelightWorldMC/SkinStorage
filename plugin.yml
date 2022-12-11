@@ -12,7 +12,7 @@ commands:
   skin:
     description: skin storage command
     permission: command.skin
-    usage: /skin <load|save>
+    usage: /skin <load|save|test>
 
 permissions:
   command.skin:

@@ -57,12 +57,13 @@ final class SkinStorageLoader extends PluginBase{
 		$nbt = CompoundTag::create();
 		foreach($this->skinListMap as $skinName => $skin){
 			$nbt->setTag($skinName, CompoundTag::create()
-				->setString("Name", $skin->getSkinId())
-				->setByteArray("Data", $skin->getSkinData())
-				->setByteArray("CapeData", $skin->getCapeData())
-				->setString("GeometryName", $skin->getGeometryName())
-				->setByteArray("GeometryData", $skin->getGeometryData())
-			);
+				->setTag("Skin", CompoundTag::create()
+					->setString("Name", $skin->getSkinId())
+					->setByteArray("Data", $skin->getSkinData())
+					->setByteArray("CapeData", $skin->getCapeData())
+					->setString("GeometryName", $skin->getGeometryName())
+					->setByteArray("GeometryData", $skin->getGeometryData())
+				));
 		}
 
 		$writer = new LittleEndianNbtSerializer();
@@ -122,6 +123,21 @@ final class SkinStorageLoader extends PluginBase{
 
 				$this->skinListMap[$name] = $sender->getSkin();
 				$sender->sendMessage(TextFormat::AQUA . "Saved my skin as $name.");
+				break;
+			case "test":
+				if(count($args) < 1){
+					$sender->sendMessage(TextFormat::YELLOW . "/skin test <name>");
+					return false;
+				}
+
+				$name = array_shift($args);
+				if(!isset($this->skinListMap[$name])){
+					$sender->sendMessage(TextFormat::RED . "Skin saved under $name not found");
+					return false;
+				}
+
+				$sender->setSkin($this->skinListMap[$name]);
+				$sender->sendSkin();
 				break;
 			default:
 				throw new InvalidCommandSyntaxException();
