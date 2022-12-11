@@ -1,0 +1,19 @@
+name: SkinStorage
+main: skh6075\SkinStorage\SkinStorageLoader
+author: skh6075
+version: 1.0.0
+api: 5.0.0
+
+src-namespace-prefix: skh6075\SkinStorage
+
+depend: [DEVirion]
+
+commands:
+  skin:
+    description: skin storage command
+    permission: command.skin
+    usage: /skin <load|save>
+
+permissions:
+  command.skin:
+    default: op
