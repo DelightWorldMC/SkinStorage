@@ -56,14 +56,12 @@ final class SkinStorageLoader extends PluginBase{
 	protected function onDisable() : void{
 		$nbt = CompoundTag::create();
 		foreach($this->skinListMap as $skinName => $skin){
-			$nbt->setTag($skinName, CompoundTag::create()
-				->setTag("Skin", CompoundTag::create()
-					->setString("Name", $skin->getSkinId())
-					->setByteArray("Data", $skin->getSkinData())
-					->setByteArray("CapeData", $skin->getCapeData())
-					->setString("GeometryName", $skin->getGeometryName())
-					->setByteArray("GeometryData", $skin->getGeometryData())
-				));
+			$nbt->setTag($skinName, CompoundTag::create()->setTag("Skin", CompoundTag::create()
+				->setString("Name", $skin->getSkinId())
+				->setByteArray("Data", $skin->getSkinData())
+				->setByteArray("CapeData", $skin->getCapeData())
+				->setString("GeometryName", $skin->getGeometryName())
+				->setByteArray("GeometryData", $skin->getGeometryData())));
 		}
 
 		$writer = new LittleEndianNbtSerializer();
