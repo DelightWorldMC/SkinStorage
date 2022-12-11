@@ -124,7 +124,6 @@ final class SkinStorageLoader extends PluginBase{
 				$sender->sendMessage(TextFormat::AQUA . "Saved my skin as $name.");
 				break;
 			default:
-				var_dump('dssd');
 				throw new InvalidCommandSyntaxException();
 		}
 
